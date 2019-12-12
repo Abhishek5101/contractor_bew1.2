@@ -4,7 +4,7 @@ from .models import Entry
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class HomeView(LoginRequiredMixin,ListView):
+class HomeView(LoginRequiredMixin, ListView):
 	model = Entry
 	template_name = 'entries/index.html'
 	context_object_name = 'blog_entries'
@@ -12,12 +12,12 @@ class HomeView(LoginRequiredMixin,ListView):
 	paginate_by = 4
 
 
-class EntryView(LoginRequiredMixin,DetailView):
+class EntryView(LoginRequiredMixin, DetailView):
 	model = Entry
 	template_name = 'entries/entry_detail.html'
 
 	
-class CreateEntryView(LoginRequiredMixin,CreateView):
+class CreateEntryView(LoginRequiredMixin, CreateView):
 	model = Entry
 	template_name = 'entries/create_entry.html'
 	fields = ['entry_title', 'entry_text']
