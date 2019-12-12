@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import RegisterationForm
+from django.contrib.auth import authenticate, login
 
 
 def register(request):
@@ -7,6 +8,11 @@ def register(request):
 		form = RegisterationForm(request.POST)
 		if form.is_valid():
 			form.save()
+			username = request.POST['username']
+			password = request.POST['password1']
+			user = authenticate(request, username=username, password=password)
+			login(request, user)
+			return redirect('blog-home')
 	else:
 		form = RegisterationForm()
 		

@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
 from .models import Entry
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class HomeView(ListView):
+class HomeView(LoginRequiredMixin,ListView):
 	model = Entry
 	template_name = 'entries/index.html'
 	context_object_name = 'blog_entries'
@@ -11,12 +12,12 @@ class HomeView(ListView):
 	paginate_by = 4
 
 
-class EntryView(DetailView):
+class EntryView(LoginRequiredMixin,DetailView):
 	model = Entry
 	template_name = 'entries/entry_detail.html'
 
 	
-class CreateEntryView(CreateView):
+class CreateEntryView(LoginRequiredMixin,CreateView):
 	model = Entry
 	template_name = 'entries/create_entry.html'
 	fields = ['entry_title', 'entry_text']
