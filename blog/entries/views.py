@@ -23,5 +23,5 @@ class CreateEntryView(LoginRequiredMixin, CreateView):
 	fields = ['entry_title', 'entry_text']
 	
 	def form_valid(self, form):
-		form.instance.entry_author = self.request.user.id
+		form.instance.entry_author = self.request.user
 		return super().form_valid(form)
